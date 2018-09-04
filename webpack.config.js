@@ -1,23 +1,44 @@
-var path = require('path');
-var SRC_DIR = path.join(__dirname, '/client/src');
-var DIST_DIR = path.join(__dirname, '/client/dist');
+const path = require('path');
 
 module.exports = {
-  entry: `${SRC_DIR}/index.jsx`,
+  entry: [
+    './client/src/Index.js'
+  ],
   output: {
     filename: 'bundle.js',
-    path: DIST_DIR
+    path: path.join(__dirname, 'client/dist')
   },
   module: {
-    loaders: [
+    rules: [
       {
-        test: /\.jsx?/,
-        include: SRC_DIR,
-        loader: 'babel-loader',
-        query: {
-          presets: ['react', 'es2015']
-        }
+        test: /\.jsx?$/,
+        use: [
+          'babel-loader'
+        ],
+        exclude: /node_modules|packages/,
+      },
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        use: [
+          'eslint-loader'
+        ]
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
       }
-    ]
+    ],
+  },
+  resolve: {
+    extensions: ['.js', '.jsx']
+  },
+
+  devServer: {
+    contentBase: './client/dist',
+    host: 'localhost',
+    historyApiFallback: true,
+    // respond to 404s with index.html
+    inline: true
   }
 };
