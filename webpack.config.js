@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   entry: [
-    './client/src/Index.js'
+    './client/src/index.js'
   ],
   output: {
     filename: 'bundle.js',
@@ -24,10 +24,6 @@ module.exports = {
           'eslint-loader'
         ]
       },
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
-      }
     ],
   },
   resolve: {
