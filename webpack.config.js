@@ -29,12 +29,3 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx']
   },
-
-  devServer: {
-    contentBase: './client/dist',
-    host: 'localhost',
-    historyApiFallback: true,
-    // respond to 404s with index.html
-    inline: true
-  }
-};
